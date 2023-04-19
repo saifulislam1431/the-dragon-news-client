@@ -44,9 +44,9 @@ const Header = () => {
                         <div>
                             <img src={profile} alt="" className='w-75'/>
                         </div>
-                        <div>
+                        <Link to="/login">
                             <button className='btn btn-dark rounded-0 px-4 py-1'>Login</button>
-                        </div>
+                        </Link>
                     </div>
                 </div>
 
