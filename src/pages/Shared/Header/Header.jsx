@@ -7,18 +7,18 @@ import profile from '../../../assets/profile-user.png'
 import { Link, NavLink } from 'react-router-dom';
 const Header = () => {
     return (
-        <header className='d-flex py-3'>
+        <header className='py-3 container-fluid'>
             <div>
             <div className="top-nav text-center pt-4">
                 <img src={logo} alt="" className='img-fluid' />
                 <p className='text-secondary fw-semibold pt-2'>Journalism Without Fear or Favour</p>
                 <p className='text-secondary'><span className='fw-bold'>{moment().format('dddd')},</span> <span className='fw-semibold'>{moment().format("MMMM D, YYYY")}</span></p>
             </div>
-            <div className="latest-news my-3 d-inline-flex align-items-center bg-secondary bg-opacity-10 p-3">
+            <div className="latest-news my-3 d-inline-flex align-items-center bg-secondary bg-opacity-10 p-3 container-fluid overflow-hidden">
                 <div>
                     <button className='btn btn-danger fw-semibold rounded-1 px-4'>Latest</button>
                 </div>
-                <div>
+                <div >
                     <Marquee gradientColor={0} pauseOnHover={true} className='fw-semibold'>
                         Match Highlights: Germany vs Spain — as it happened   !
                         <span className='mx-5'>

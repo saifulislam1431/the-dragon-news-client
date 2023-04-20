@@ -17,7 +17,7 @@ const Register = () => {
     return (
         <main>
             <section className='d-flex my-5 py-5  align-items-center justify-content-center'>
-                <div className=' shadow  py-4 px-5 rounded-1 w-50'>
+                <div className=' shadow  py-4 px-5 rounded-1 container-fluid'>
                     <h5 className='fw-bold mb-5 text-center'>Register your account</h5>
                     <hr />
                     <div className='mt-5 d-flex justify-content-center'>
