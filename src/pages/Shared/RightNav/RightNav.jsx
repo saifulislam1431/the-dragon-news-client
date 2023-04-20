@@ -13,77 +13,82 @@ import { UserContext } from '../../../AuthProviders/AuthProvider';
 import { toast } from 'react-toastify';
 
 const RightNav = () => {
-    const {googleSignIn , githubSignIn} = useContext(UserContext);
+    const { googleSignIn, githubSignIn, user } = useContext(UserContext);
 
-    const handleGoogleSignIn =()=>{
+    const handleGoogleSignIn = () => {
         googleSignIn()
-        .then(res=>{
-            const loggedUser = res.user;
-            console.log(loggedUser);
-            toast.success('Sign In Successful!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+            .then(res => {
+                const loggedUser = res.user;
+                console.log(loggedUser);
+                toast.success('Sign In Successful!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
                 });
-        })
-        .catch(error=>{
-            toast.error(error.message, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+            })
+            .catch(error => {
+                toast.error(error.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
                 });
-        })
+            })
     }
-    const handleGithubSignIn =()=>{
+    const handleGithubSignIn = () => {
         githubSignIn()
-        .then(res=>{
-            const loggedUser = res.user;
-            console.log(loggedUser);
-            toast.success('Sign In Successful!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+            .then(res => {
+                const loggedUser = res.user;
+                console.log(loggedUser);
+                toast.success('Sign In Successful!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
                 });
-        })
-        .catch(error=>{
-            
-            toast.error(error.message, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+            })
+            .catch(error => {
+
+                toast.error(error.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
                 });
-        })
+            })
     }
 
     return (
         <section>
-            <h5 className='fw-bolder'>Login With</h5>
-            <div className='d-flex flex-column'>
+            {
+                user ? '' :
+                    <>
+                        <h5 className='fw-bolder'>Login With</h5>
+                        <div className='d-flex flex-column'>
 
-                <Button variant="outline-primary" className='my-3' onClick={handleGoogleSignIn}><FaGoogle /> Login With Google</Button>
+                            <Button variant="outline-primary" className='my-3' onClick={handleGoogleSignIn}><FaGoogle /> Login With Google</Button>
 
-                <Button variant="outline-dark" onClick={handleGithubSignIn}><FaGithub /> Login With Github</Button>
-            </div>
+                            <Button variant="outline-dark" onClick={handleGithubSignIn}><FaGithub /> Login With Github</Button>
+                        </div>
+                    </>
+            }
 
             <div className='mt-5 mb-3'>
                 <h5 className='fw-bolder'>Find Us On</h5>
@@ -119,11 +124,11 @@ const RightNav = () => {
                     <Card.Img src={bg} alt="Card image" />
                     <Card.ImgOverlay className='text-center'>
                         <div className='mt-3 pt-4'>
-                        <h2 className='fw-bolder mb-4'>Create an Amazing Newspaper</h2>
-                        <p>
-                        Discover thousands of options, easy to customize layouts, one-click to import demo and much more.
-                        </p>
-                        <button className='btn btn-danger py-2 rounded-0 mt-3'>Learn More</button>
+                            <h2 className='fw-bolder mb-4'>Create an Amazing Newspaper</h2>
+                            <p>
+                                Discover thousands of options, easy to customize layouts, one-click to import demo and much more.
+                            </p>
+                            <button className='btn btn-danger py-2 rounded-0 mt-3'>Learn More</button>
                         </div>
                     </Card.ImgOverlay>
                 </Card>

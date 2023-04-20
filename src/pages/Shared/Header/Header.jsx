@@ -1,11 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../../index.css'
 import logo from '../../../assets/logo.png';
 import moment from 'moment/moment';
 import Marquee from "react-fast-marquee";
 import profile from '../../../assets/profile-user.png'
 import { Link, NavLink } from 'react-router-dom';
+import { UserContext } from '../../../AuthProviders/AuthProvider';
+import { toast } from 'react-toastify';
+
 const Header = () => {
+    const {user,logOut} = useContext(UserContext);
+    const handleLogOut = () =>{
+        logOut()
+        .then(()=>{
+            toast.success('Sign In Successful!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        })
+        .catch(error=>{
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        })
+    }
     return (
         <header className='py-3 container-fluid'>
             <div>
@@ -41,12 +72,24 @@ const Header = () => {
                 </div>
                 <div>
                     <div className='d-flex align-items-center gap-1'>
-                        <div>
+                        {
+                            user ? 
+                            <div>
+                            <img src={user.photoURL} alt="" className='w-75 rounded-circle'/>
+                        </div>
+                            :
+                            <div>
                             <img src={profile} alt="" className='w-75'/>
                         </div>
-                        <Link to="/login">
+                        }
+                        {
+                            user ? 
+                            <button className='btn btn-warning rounded-0 px-4 py-1' onClick={handleLogOut}>Sign out</button>
+                            : 
+                            <Link to="/login">
                             <button className='btn btn-dark rounded-0 px-4 py-1'>Login</button>
                         </Link>
+                        }
                     </div>
                 </div>
 
