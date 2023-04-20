@@ -19,7 +19,8 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/category/:id",
-                element: <Category></Category>
+                element: <Category></Category>,
+                loader: ({params})=> fetch(`https://the-dragon-news-server-rho.vercel.app/categories/${params.id}`)
             },
             {
                 path: "/login",
@@ -32,11 +33,11 @@ const Router = createBrowserRouter([
         ]
     },
     {
-        path: "news",
+        path: "/news",
         element: <NewsLayout></NewsLayout>,
         children: [
             {
-                path: "/:id",
+                path: "/news/:id",
                 element: <News></News>
             }
         ]
