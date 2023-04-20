@@ -1,30 +1,43 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../Layouts/Main';
-import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
+import Home from '../pages/Home/Home';
+import NewsLayout from '../Layouts/NewsLayout';
+import News from '../pages/News/News';
+import Category from '../component/category/Category';
 
 const Router = createBrowserRouter([
     {
-        path:"/",
+        path: "/",
         element: <Main></Main>,
-        children:[
+        children: [
             {
-                path:"/",
-                element:<Home></Home>
-            },
-            {
-                path: "/category/0",
+                path: "/",
                 element: <Home></Home>
             },
             {
-                path:"/login",
-                element:<Login></Login>
+                path: "/category/:id",
+                element: <Category></Category>
             },
             {
-                path:"/register",
-                element:<Register></Register>
+                path: "/login",
+                element: <Login></Login>
+            },
+            {
+                path: "/register",
+                element: <Register></Register>
+            }
+        ]
+    },
+    {
+        path: "news",
+        element: <NewsLayout></NewsLayout>,
+        children: [
+            {
+                path: "/:id",
+                element: <News></News>
             }
         ]
     }
