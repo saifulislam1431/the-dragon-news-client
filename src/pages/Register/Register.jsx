@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useContext } from 'react';
 import { UserContext } from '../../AuthProviders/AuthProvider';
+import { toast } from 'react-toastify';
+import { updateProfile } from 'firebase/auth';
 
 
 const Register = () => {
-    const {registerUser} = useContext(UserContext);
-
+    const {registerUser,profileUpdate} = useContext(UserContext);
+   const navigate = useNavigate();
     const [isShow, setIsShow] = useState(false);
     const [type, setType] = useState('password');
 
@@ -21,6 +23,108 @@ const Register = () => {
     const handleRegister = (e)=>{
         e.preventDefault();
         const form = e.target;
+        const photo = form.photoUrl.value;
+        const name = form.username.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name , email ,password);
+
+        if(password.length < 6){
+           toast.error('Your password should minimum eight in length!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return ;
+        }
+        else if(!/(?=.*[A-Z])/.test(password)){
+            toast.error('Your password should contain at least one upper case!', {
+                 position: "top-center",
+                 autoClose: 5000,
+                 hideProgressBar: false,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+                 theme: "light",
+             });
+             return ;
+         }
+         else if(!/(?=.*[0-9])/.test(password)){
+            toast.error('Your password should contain at least one digit!', {
+                 position: "top-center",
+                 autoClose: 5000,
+                 hideProgressBar: false,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+                 theme: "light",
+             });
+             return ;
+         }
+         else if(!/(?=.*\W)/.test(password)){
+            toast.error('Your password should contain at least one special character!', {
+                 position: "top-center",
+                 autoClose: 5000,
+                 hideProgressBar: false,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+                 theme: "light",
+             });
+             return ;
+         };
+
+         registerUser(email , password)
+         .then(res=>{
+            const registeredUser = res.user;
+            toast.success('You have successfully registered', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            profileUpdate(res.user)
+            navigate("/");
+            form.reset();
+         })
+         .catch(error=>{
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
+         })
+
+         const profileUpdate =(currentUser)=>{
+            updateProfile(currentUser,{
+                displayName: name , photoURL: photo
+            }).then(()=>{
+                console.log("Profile Update")
+            }).catch(error=>{
+                console.log(error.message);
+            })
+         }
+
+         
+
 
     }
     return (
@@ -30,7 +134,7 @@ const Register = () => {
                     <h5 className='fw-bold mb-5 text-center'>Register your account</h5>
                     <hr />
                     <div className='mt-5 d-flex justify-content-center'>
-                        <form>
+                        <form onSubmit={handleRegister}>
                             <label className='fw-semibold mb-2 mt-3'>
                                 Your Name:
                             </label>
@@ -41,7 +145,7 @@ const Register = () => {
                                 Photo URL:
                             </label>
                             <br />
-                            <input type="url" name="photoUrl" placeholder="https://example.com/image.png" required className='w-100 py-2 px-3 border-0 bg-secondary bg-opacity-10 rounded-1  placeholder-glow ' />
+                            <input type="url" name="photoUrl" placeholder="https://example.com/image.png"  className='w-100 py-2 px-3 border-0 bg-secondary bg-opacity-10 rounded-1  placeholder-glow ' />
 
                             <br />
                             <label className='fw-semibold mb-2 mt-4'>

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEye , FaEyeSlash } from 'react-icons/fa';
+import { useContext } from 'react';
+import { UserContext } from '../../AuthProviders/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const {logInUser} = useContext(UserContext);
     const [isShow , setIsShow] = useState(false);
     const [type , setType] = useState('password');
 
@@ -13,6 +18,44 @@ const Login = () => {
         setType('password')
     } 
 
+    const handleLogIn =(e)=>{
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        logInUser(email , password)
+        .then(res=>{
+            const registeredUser = res.user;
+            console.log(registeredUser);
+            toast.success('You have successfully registered', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            navigate("/");
+            form.reset();
+         })
+         .catch(error=>{
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
+         })
+    }
+
     return (
         <main>
             <section className='d-flex my-5 py-5  align-items-center justify-content-center'>
@@ -20,7 +63,7 @@ const Login = () => {
                     <h5 className='fw-bold mb-5 text-center'>Login your account</h5>
                     <hr />
                     <div className='mt-5 d-flex justify-content-center'>
-                        <form>
+                        <form onSubmit={handleLogIn}>
                             <label className='fw-semibold mb-2'>
                                 Email address:
                             </label>

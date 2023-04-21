@@ -13,7 +13,7 @@ const Header = () => {
     const handleLogOut = () =>{
         logOut()
         .then(()=>{
-            toast.success('Sign In Successful!', {
+            toast.success('Sign out Successful!', {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -71,11 +71,12 @@ const Header = () => {
                     </div>
                 </div>
                 <div>
-                    <div className='d-flex align-items-center gap-1'>
+                    <div className='d-flex align-items-center gap-3'>
                         {
                             user ? 
                             <div>
-                            <img src={user.photoURL} alt="" className='w-75 rounded-circle'/>
+                                <p className='fw-semibold text-success mb-0'>Welcome!</p>
+                            <p className='fw-bold text-secondary'>{user.displayName}</p>
                         </div>
                             :
                             <div>
