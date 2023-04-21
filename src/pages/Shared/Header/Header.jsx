@@ -86,7 +86,7 @@ const Header = () => {
                             user ? 
                             <button className='btn btn-warning rounded-0 px-4 py-1' onClick={handleLogOut}>Sign out</button>
                             : 
-                            <Link to="/login">
+                            <Link to="/form/login">
                             <button className='btn btn-dark rounded-0 px-4 py-1'>Login</button>
                         </Link>
                         }

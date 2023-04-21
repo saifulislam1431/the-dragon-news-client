@@ -45,7 +45,7 @@ const Login = () => {
                             <br />
                             <div className='text-center mt-4'>
                             <span className='btn mb-2'>Forgot Password?</span>
-                            <p>Don't have an account? <Link to='/register' className='text-danger text-decoration-none'>Register</Link></p>
+                            <p>Don't have an account? <Link to='/form/register' className='text-danger text-decoration-none'>Register</Link></p>
                             </div>
                         </form>
 

@@ -7,6 +7,7 @@ import Home from '../pages/Home/Home';
 import NewsLayout from '../Layouts/NewsLayout';
 import News from '../pages/News/News';
 import Category from '../component/category/Category';
+import LoginRegisterLayout from '../Layouts/LoginRegisterLayout';
 
 const Router = createBrowserRouter([
     {
@@ -22,14 +23,8 @@ const Router = createBrowserRouter([
                 element: <Category></Category>,
                 loader: ({params})=> fetch(`https://the-dragon-news-server-rho.vercel.app/categories/${params.id}`)
             },
-            {
-                path: "/login",
-                element: <Login></Login>
-            },
-            {
-                path: "/register",
-                element: <Register></Register>
-            }
+            
+           
         ]
     },
     {
@@ -42,6 +37,23 @@ const Router = createBrowserRouter([
                 loader: ({params})=> fetch(`https://the-dragon-news-server-rho.vercel.app/news/${params.id}`)
             }
         ]
+    },
+    {
+      
+            
+      path: "/form",
+      element:<LoginRegisterLayout></LoginRegisterLayout>,
+      children:[
+        {
+            path: "/form/login",
+            element: <Login></Login>
+        },
+        {
+            path: "/form/register",
+            element: <Register></Register>
+        }
+      ]
+      
     }
 ])
 export default Router;

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useContext } from 'react';
+import { UserContext } from '../../AuthProviders/AuthProvider';
 
 
 const Register = () => {
+    const {registerUser} = useContext(UserContext);
+
     const [isShow, setIsShow] = useState(false);
     const [type, setType] = useState('password');
 
@@ -14,6 +18,11 @@ const Register = () => {
         setType('password')
     }
 
+    const handleRegister = (e)=>{
+        e.preventDefault();
+        const form = e.target;
+
+    }
     return (
         <main>
             <section className='d-flex my-5 py-5  align-items-center justify-content-center'>
@@ -63,7 +72,7 @@ const Register = () => {
                             <button type="submit" className='w-100 btn btn-dark mt-4 mb-2 rounded-1'>Register</button>
                             <br />
                             <div className='text-center mt-4'>
-                                <p>Already have an account? <Link to='/login' className='text-success text-decoration-none'>Login</Link></p>
+                                <p>Already have an account? <Link to='/form/login' className='text-success text-decoration-none'>Login</Link></p>
                             </div>
                         </form>
 
