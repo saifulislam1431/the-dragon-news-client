@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link, useLoaderData } from 'react-router-dom';
+import Insight from '../Insight/Insight';
 
 const News = () => {
     const news = useLoaderData();
@@ -21,6 +22,9 @@ const News = () => {
                     </Link>
                 </Card.Body>
             </Card>
+            <div className='mt-5'>
+            <Insight></Insight>
+            </div>
         </div>
     );
 };
