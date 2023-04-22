@@ -71,7 +71,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div>
-                    <div className='d-flex align-items-center gap-3'>
+                    <div className='d-flex align-items-center flex-column flex-lg-row gap-3'>
                         {
                             user ? 
                             <div>
