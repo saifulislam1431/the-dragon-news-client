@@ -8,6 +8,7 @@ import NewsLayout from '../Layouts/NewsLayout';
 import News from '../pages/News/News';
 import Category from '../component/category/Category';
 import LoginRegisterLayout from '../Layouts/LoginRegisterLayout';
+import PrivateRouter from './PrivateRouter';
 
 const Router = createBrowserRouter([
     {
@@ -33,7 +34,7 @@ const Router = createBrowserRouter([
         children: [
             {
                 path: "/news/:id",
-                element: <News></News>,
+                element: <PrivateRouter><News></News></PrivateRouter>,
                 loader: ({params})=> fetch(`https://the-dragon-news-server-rho.vercel.app/news/${params.id}`)
             }
         ]

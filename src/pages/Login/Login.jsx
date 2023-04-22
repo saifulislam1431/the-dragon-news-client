@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye , FaEyeSlash } from 'react-icons/fa';
 import { useContext } from 'react';
 import { UserContext } from '../../AuthProviders/AuthProvider';
@@ -7,6 +7,10 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location);
+    const from =location?.state?.from?.pathname || "/";
+
     const {logInUser} = useContext(UserContext);
     const [isShow , setIsShow] = useState(false);
     const [type , setType] = useState('password');
@@ -38,7 +42,7 @@ const Login = () => {
                 progress: undefined,
                 theme: "light",
             });
-            navigate("/");
+            navigate(from, {replace: true});
             form.reset();
          })
          .catch(error=>{
